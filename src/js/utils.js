@@ -1,7 +1,7 @@
 import Toastify from 'toastify-js'
 import 'toastify-js/src/toastify.css'
 
-const url = '/api/'
+const url = 'http://20.4.202.201/api/'
 
 function showToast (text) {
     Toastify({
