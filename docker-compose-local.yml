@@ -1,0 +1,31 @@
+# cd D:\GitHub\wayfarer-demo
+# docker compose -d --file docker-compose-local.yml up
+
+# docker compose down
+
+# the -d flag means we can continue using the command prompt without seeing container log output
+# docker compose up -d
+# add --force-recreate if you need to rebuild only
+
+version: '3'
+services:
+
+  wayfarer:
+    # image: "wayfarercr.azurecr.io/wayfarer:main"
+    # image: "geographika/wayfarer:main"
+    image: "wayfarer"
+    container_name: wayfarer
+    hostname: wayfarer
+    restart: always
+    ports:
+      - 8000:8000 # maps port 8000 on localhost to 8000 in container
+
+  wayfarer-demo:
+    # image: "wayfarercr.azurecr.io/wayfarer-demo:main"
+    # image: "geographika/wayfarer-demo:main"
+    image: "wayfarer-demo"
+    container_name: wayfarer-demo
+    hostname: wayfarer-demo
+    restart: always
+    ports:
+      - 8181:80 # maps port 8181 on localhost to 80 in container

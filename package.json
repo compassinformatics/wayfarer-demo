@@ -1,0 +1,29 @@
+{
+  "name": "wayfarer-demo",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "devDependencies": {
+    "eslint": "^8.35.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-n": "^15.6.1",
+    "eslint-plugin-promise": "^6.1.1",
+    "rollup-plugin-copy": "^3.4.0",
+    "sass": "^1.59.3",
+    "vite": "^4.0.4"
+  },
+  "dependencies": {
+    "@popperjs/core": "^2.11.6",
+    "bootstrap": "^5.2.3",
+    "interactjs": "^1.10.17",
+    "ol": "latest",
+    "ol-contextmenu": "^5.1.4",
+    "ol-ext": "^4.0.6",
+    "simple-datatables": "^7.1.2",
+    "toastify-js": "^1.12.0"
+  }
+}

@@ -1,0 +1,25 @@
+version: '3'
+services:
+
+  wayfarer-backend:
+    image: "wayfarercr.azurecr.io/wayfarer:main"
+    container_name: wayfarer-backend
+    networks:
+      - wayfarer_default
+    ports:
+      - 8000:8000 # maps port 8000 on localhost to 8000 in container
+
+  wayfarer-frontend:
+    image: "wayfarercr.azurecr.io/wayfarer-demo:main"
+    container_name: wayfarer-frontend
+    networks:
+      - wayfarer_default
+    # not available in ACI
+    extra_hosts:
+      - "host.docker.internal:wayfarer-backend"
+    ports:
+      - 80:80
+
+networks:
+  wayfarer_default:
+    external: true
