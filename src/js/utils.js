@@ -1,7 +1,7 @@
 import Toastify from 'toastify-js'
 import 'toastify-js/src/toastify.css'
 
-const url = 'http://108.141.255.176:8000/api/'
+const url = 'https://mapserver.compass.ie/wayfarer/'
 
 function showToast (text) {
     Toastify({

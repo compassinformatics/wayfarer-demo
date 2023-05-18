@@ -6,20 +6,20 @@ import VectorSource from 'ol/source/Vector.js'
 import { Fill, Stroke, Style, Circle, Text } from 'ol/style.js'
 import { getNetworkEdits } from './networkeditor.js'
 import GeoJSON from 'ol/format/GeoJSON.js'
+import { callService } from './utils.js'
 
 import Toastify from 'toastify-js'
 import 'toastify-js/src/toastify.css'
 
 let orderedEdges = []
-const url = 'http://127.0.0.1:8020/'
 
-export function clearEdges () {
+export function clearEdges() {
     orderedEdges = []
     // clear all previous features so only the last drawn feature remains
     resultsLayer.getSource().clear()
 }
 
-function resultsStyle (feature, resolution) {
+function resultsStyle(feature, resolution) {
     let text
 
     if (feature.getGeometry().getType() === 'LineString') {
@@ -73,7 +73,7 @@ const resultsLayer = new VectorLayer({
     style: resultsStyle
 })
 
-function clearPreviousFeatures () {
+function clearPreviousFeatures() {
     // remove any previous edges from the results layer
 
     resultsLayer.getSource().forEachFeature(function (feature) {
@@ -98,58 +98,8 @@ function clearPreviousFeatures () {
 //    })
 // }
 
-function callService (networkLayer, resultsLayer, orderedEdges) {
-    // create a new XMLHttpRequest object
 
-    const geojson = getNetworkEdits()
-
-    const xhr = new XMLHttpRequest()
-
-    // set the HTTP method and URL of the request
-    xhr.open('POST', url + 'solve_shortest_path_from_edges', true)
-    xhr.setRequestHeader('Content-Type', 'application/json')
-    xhr.setRequestHeader('Access-Control-Allow-Origin', '*')
-
-    // set the function to be called when the request completes successfully
-    xhr.onload = function () {
-        // check if the status code indicates success
-        if (xhr.status === 200) {
-            // parse the response text as JSON
-            const data = JSON.parse(xhr.responseText)
-            // do something with the data
-            console.log(data)
-
-            clearPreviousFeatures()
-
-            // load route from the GeoJSON
-            const geojsonFormat = new GeoJSON()
-            const feats = geojsonFormat.readFeatures(data)
-            resultsLayer.getSource().addFeatures(feats)
-
-            // highlightRoute(networkLayer, resultsLayer, data)
-        } else {
-            // handle the error
-            const msg = 'Request failed. Status code: ' + xhr.status
-            showToast(msg)
-            console.error(msg)
-        }
-    }
-
-    // set the function to be called if an error occurs during the request
-    xhr.onerror = function () {
-        showToast('Request failed. Network error.')
-    }
-
-    // send the request
-    const jsonData = JSON.stringify({
-        path: orderedEdges,
-        edits: geojson
-    })
-
-    xhr.send(jsonData)
-}
-
-function isFeatureSnapped (map, coord, searchLayer) {
+function isFeatureSnapped(map, coord, searchLayer) {
     let extent = boundingExtent([coord]) // still a single point
     const bufferDistance = map.getView().getResolution() * 3 // use a 6 pixel tolerance for snapping
     extent = buffer(extent, bufferDistance) // buffer the point
@@ -163,7 +113,22 @@ function isFeatureSnapped (map, coord, searchLayer) {
     }
 }
 
-function drawEnd (evt, networkLayer, resultsLayer) {
+
+function serviceCallback(data) {
+    // load route from the GeoJSON
+
+    clearPreviousFeatures()
+
+    // load route from the GeoJSON
+    const geojsonFormat = new GeoJSON()
+    const feats = geojsonFormat.readFeatures(data)
+    resultsLayer.getSource().addFeatures(feats)
+
+    // highlightRoute(networkLayer, resultsLayer, data)dateTable(feats, selectInteraction, resultsLayer)
+
+}
+
+function drawEnd(evt, networkLayer, resultsLayer) {
     const feature = evt.feature
     const coordinate = feature.getGeometry().getCoordinates()
     const closestNetworkFeature = networkLayer.getSource().getClosestFeatureToCoordinate(coordinate)
@@ -173,12 +138,17 @@ function drawEnd (evt, networkLayer, resultsLayer) {
         feature.set('index', orderedEdges.length)
     }
 
+    const jsonData = JSON.stringify({
+        path: orderedEdges,
+        edits: getNetworkEdits()
+    })
+
     if (orderedEdges.length > 1) {
-        callService(networkLayer, resultsLayer, orderedEdges)
+        callService('solve_shortest_path_from_edges', jsonData, serviceCallback)
     }
 }
 
-function showToast (text) {
+function showToast(text) {
     Toastify({
         text,
         duration: 3000,
@@ -192,7 +162,7 @@ function showToast (text) {
     }).showToast()
 }
 
-export function createEdgeSolver (map, networkLayer) {
+export function createEdgeSolver(map, networkLayer) {
     map.addLayer(resultsLayer)
 
     const draw = new Draw({
