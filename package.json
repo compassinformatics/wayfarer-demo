@@ -17,7 +17,7 @@
     "vite": "^4.0.4"
   },
   "dependencies": {
-    "@popperjs/core": "^2.11.6",
+    "@popperjs/core": "^2.11.7",
     "bootstrap": "^5.2.3",
     "interactjs": "^1.10.17",
     "ol": "latest",
