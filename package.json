@@ -23,7 +23,7 @@
     "ol": "latest",
     "ol-contextmenu": "^5.1.4",
     "ol-ext": "^4.0.6",
-    "simple-datatables": "^7.1.2",
+    "simple-datatables": "^7.3.0",
     "toastify-js": "^1.12.0"
   }
 }
