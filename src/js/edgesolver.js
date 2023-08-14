@@ -13,13 +13,13 @@ import 'toastify-js/src/toastify.css'
 
 let orderedEdges = []
 
-export function clearEdges() {
+export function clearEdges () {
     orderedEdges = []
     // clear all previous features so only the last drawn feature remains
     resultsLayer.getSource().clear()
 }
 
-function resultsStyle(feature, resolution) {
+function resultsStyle (feature, resolution) {
     let text
 
     if (feature.getGeometry().getType() === 'LineString') {
@@ -73,7 +73,7 @@ const resultsLayer = new VectorLayer({
     style: resultsStyle
 })
 
-function clearPreviousFeatures() {
+function clearPreviousFeatures () {
     // remove any previous edges from the results layer
 
     resultsLayer.getSource().forEachFeature(function (feature) {
@@ -98,8 +98,7 @@ function clearPreviousFeatures() {
 //    })
 // }
 
-
-function isFeatureSnapped(map, coord, searchLayer) {
+function isFeatureSnapped (map, coord, searchLayer) {
     let extent = boundingExtent([coord]) // still a single point
     const bufferDistance = map.getView().getResolution() * 3 // use a 6 pixel tolerance for snapping
     extent = buffer(extent, bufferDistance) // buffer the point
@@ -113,8 +112,7 @@ function isFeatureSnapped(map, coord, searchLayer) {
     }
 }
 
-
-function serviceCallback(data) {
+function serviceCallback (data) {
     // load route from the GeoJSON
 
     clearPreviousFeatures()
@@ -125,10 +123,9 @@ function serviceCallback(data) {
     resultsLayer.getSource().addFeatures(feats)
 
     // highlightRoute(networkLayer, resultsLayer, data)dateTable(feats, selectInteraction, resultsLayer)
-
 }
 
-function drawEnd(evt, networkLayer, resultsLayer) {
+function drawEnd (evt, networkLayer, resultsLayer) {
     const feature = evt.feature
     const coordinate = feature.getGeometry().getCoordinates()
     const closestNetworkFeature = networkLayer.getSource().getClosestFeatureToCoordinate(coordinate)
@@ -148,21 +145,7 @@ function drawEnd(evt, networkLayer, resultsLayer) {
     }
 }
 
-function showToast(text) {
-    Toastify({
-        text,
-        duration: 3000,
-        close: true,
-        gravity: 'bottom', // `top` or `bottom`
-        position: 'right', // `left`, `center` or `right`
-        stopOnFocus: true // Prevents dismissing of toast on hover
-        // style: {
-        //    background: "linear-gradient(to right, #00b09b, #96c93d)",
-        // },
-    }).showToast()
-}
-
-export function createEdgeSolver(map, networkLayer) {
+export function createEdgeSolver (map, networkLayer) {
     map.addLayer(resultsLayer)
 
     const draw = new Draw({

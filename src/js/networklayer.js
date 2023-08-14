@@ -7,7 +7,7 @@ import { Point } from 'ol/geom'
 let showNetworkLabels = false
 let networkLayer
 
-let networkLineColor = 'rgba(255, 255, 255, 0.7)';
+let networkLineColor = 'rgba(255, 255, 255, 0.7)'
 
 function networkStyle (feature, resolution) {
     function getText (feature) {
@@ -20,7 +20,7 @@ function networkStyle (feature, resolution) {
 
     const styles = [new Style({
         stroke: new Stroke({
-            color: networkLineColor, //'rgba(255, 255, 255, 0.7)',
+            color: networkLineColor, // 'rgba(255, 255, 255, 0.7)',
             width: 2
         }),
         text: new Text({
@@ -48,7 +48,6 @@ function networkStyle (feature, resolution) {
         const dx = end[0] - start[0]
         const dy = end[1] - start[1]
         const rotation = Math.atan2(dy, dx)
-
 
         styles.push(
             new Style({
@@ -103,8 +102,7 @@ export function toggleLabels () {
     networkLayer.getSource().changed()
 }
 
-export function createNetworkLayer(jsn, background = '#1a2b39', lineColor = 'rgba(255, 255, 255, 0.7)') {
-
+export function createNetworkLayer (jsn, background = '#1a2b39', lineColor = 'rgba(255, 255, 255, 0.7)') {
     networkLineColor = lineColor
 
     networkLayer = new VectorLayer({

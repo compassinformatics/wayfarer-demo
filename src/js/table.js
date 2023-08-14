@@ -82,8 +82,8 @@ export function updateTable (feats, originSelectInteraction, originResultsLayer)
 
     // myTable.refresh()
 
-    const tableDiv = document.getElementById('mydiv');
-    tableDiv.style.visibility = 'visible';
+    const tableDiv = document.getElementById('mydiv')
+    tableDiv.style.visibility = 'visible'
 }
 
 export function createTable () {

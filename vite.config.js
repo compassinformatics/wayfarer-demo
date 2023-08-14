@@ -9,12 +9,12 @@ export default {
         hot: true,
         proxy: {
             // note the Python services must also be deployed to an /api end point
-            "/api": {
-                target: "http://127.0.0.1:8020",
+            '/api': {
+                target: 'http://127.0.0.1:8020',
                 changeOrigin: true,
-                secure: false,
-            },
-        },
+                secure: false
+            }
+        }
     },
     build: {
         sourcemap: true,
@@ -35,7 +35,7 @@ export default {
                     hook: 'writeBundle'
                 })
             ]
-        },
+        }
 
-    },
+    }
 }

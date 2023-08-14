@@ -14,12 +14,12 @@ import { createIsochroneTool } from './isochronessolver.js'
 
 import { createNetworkLayer, toggleLabels } from './networklayer.js'
 
-function init() {
+function init () {
     const geojsonFile = './data/stbrice.json'
     const extent = [2.3314107610246633, 48.988440397479536, 2.4050093789098863, 49.01280894618151]
     const bbox = transformExtent(extent, 'EPSG:4326', 'EPSG:3857')
     const background = null// '#1a2b39'  //null
-    const showOSM = true
+    // const showOSM = true
 
     const networkLayer = createNetworkLayer(geojsonFile, background)
 
