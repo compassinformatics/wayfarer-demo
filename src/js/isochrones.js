@@ -28,7 +28,7 @@ function init () {
         layers: [
             new TileLayer({
                 source: new XYZ({
-                    url: 'http://stamen-tiles-c.a.ssl.fastly.net/toner/{z}/{x}/{y}.png'
+                    url: 'https://tiles.stadiamaps.com/tiles/stamen_toner/{z}/{x}/{y}@2x.png'
                 })
             }),
             networkLayer
