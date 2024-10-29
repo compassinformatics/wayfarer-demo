@@ -7,23 +7,23 @@
     "serve": "vite preview"
   },
   "devDependencies": {
-    "eslint": "^8.35.0",
-    "eslint-config-standard": "^17.0.0",
-    "eslint-plugin-import": "^2.27.5",
-    "eslint-plugin-n": "^15.6.1",
-    "eslint-plugin-promise": "^6.1.1",
-    "rollup-plugin-copy": "^3.4.0",
-    "sass": "^1.59.3",
-    "vite": "^4.0.4"
+    "eslint": "^8.57.1",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-n": "^15.7.0",
+    "eslint-plugin-promise": "^6.6.0",
+    "rollup-plugin-copy": "^3.5.0",
+    "sass": "^1.80.4",
+    "vite": "^4.5.5"
   },
   "dependencies": {
-    "@popperjs/core": "^2.11.6",
-    "bootstrap": "^5.2.3",
-    "interactjs": "^1.10.17",
-    "ol": "latest",
-    "ol-contextmenu": "^5.1.4",
-    "ol-ext": "^4.0.6",
-    "simple-datatables": "^7.1.2",
+    "@popperjs/core": "^2.11.8",
+    "bootstrap": "^5.3.3",
+    "interactjs": "^1.10.27",
+    "ol": "^10.2.1",
+    "ol-contextmenu": "^5.5.0",
+    "ol-ext": "^4.0.24",
+    "simple-datatables": "^7.3.0",
     "toastify-js": "^1.12.0"
   }
 }

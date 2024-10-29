@@ -2,7 +2,7 @@ import { Map, View } from 'ol'
 import TileLayer from 'ol/layer/Tile'
 import { Snap } from 'ol/interaction.js'
 import { transformExtent } from 'ol/proj'
-import XYZ from 'ol/source/XYZ.js'
+import StadiaMaps from 'ol/source/StadiaMaps.js'
 import { getCenter } from 'ol/extent'
 
 import 'ol/ol.css'
@@ -32,7 +32,7 @@ function init () {
         target: 'map',
         layers: [
             new TileLayer({
-                source: new ol.source.StadiaMaps({
+                source: new StadiaMaps({
                     layer: 'stamen_toner',
                     retina: true
                 }),
