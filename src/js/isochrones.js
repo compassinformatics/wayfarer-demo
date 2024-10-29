@@ -27,8 +27,9 @@ function init () {
         target: 'map',
         layers: [
             new TileLayer({
-                source: new XYZ({
-                    url: 'https://tiles.stadiamaps.com/tiles/stamen_toner/{z}/{x}/{y}@2x.png'
+                source: new ol.source.StadiaMaps({
+                    layer: 'stamen_toner',
+                    retina: true
                 })
             }),
             networkLayer
